@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script defer src="js/script.js"></script>
+    <title>Memory Game</title>
+  </head>
+  <body>
+    <container>
+      <section class="playerInput">
+      <form id="form" onsubmit="event.preventDefault(); handleSubmit();">
+        <h2>Enter Player Names</h2>
+
+        <div class="player1Form">
+          <label for="player1" id="player1Label">Player 1:</label>
+          <input
+            type="text"
+            id="player1"
+            name="player1"
+            placeholder="Enter Name"
+          />
+        </div>
+
+        <div class="player2Form">
+          <label for="player2" id="player2Label">Player 2:</label>
+          <input
+            type="text"
+            id="player2"
+            name="player2"
+            placeholder="Enter Name"
+          />
+        </div>
+      </section>
+
+      <section class="gameButtons">
+        <input type="submit" id="submitBtn" value="Submit" />
+        <input
+          type="button"
+          id="resetBtn"
+          value="Reset Game"
+          onclick="resetGame();"
+        />
+        <input
+          type="button"
+          id="resetBtn"
+          value="Reset"
+          style="display: none"
+          onclick="handleReset();"
+        />
+      </form>
+    </section>
+
+      <section class="playerScores">
+        <h2>Player Scores</h2>
+        <div id="player1Score">Player 1: 0</div>
+        <div id="player2Score">Player 2: 0</div>
+      </section>
+      <section class="game-grid">
+        <div class="game-board"></div>
+      </section>
+      <!-- Error modal displays if either player name is null-->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Please enter both players</p>
+        </div>
+      </div>
+    </container>
+  </body>
+</html>
