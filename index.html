@@ -15,12 +15,11 @@
     <title>Memory Game</title>
   </head>
   <body>
-    <container>
-      <section class="playerInput">
+<div class="container--10">
+  <div class="playerInput">
       <form id="form" onsubmit="event.preventDefault(); handleSubmit();">
         <h2>Enter Player Names</h2>
-
-        <div class="player1Form">
+          <div class="player1Form">
           <label for="player1" id="player1Label">Player 1:</label>
           <input
             type="text"
@@ -29,8 +28,7 @@
             placeholder="Enter Name"
           />
         </div>
-
-        <div class="player2Form">
+          <div class="player2Form">
           <label for="player2" id="player2Label">Player 2:</label>
           <input
             type="text"
@@ -39,9 +37,10 @@
             placeholder="Enter Name"
           />
         </div>
-      </section>
-
-      <section class="gameButtons">
+        </form>
+  </div>
+  <div class="gameButtons">
+        <form id="form2" onsubmit="event.preventDefault(); handleSubmit();"></form>
         <input type="submit" id="submitBtn" value="Submit" />
         <input
           type="button"
@@ -57,16 +56,15 @@
           onclick="handleReset();"
         />
       </form>
-    </section>
-
-      <section class="playerScores">
+  </div>
+  <div class="game-grid">
+      <div class="game-board"></div>
+  </div>
+  <div class="playerScores">
         <h2>Player Scores</h2>
         <div id="player1Score">Player 1: 0</div>
         <div id="player2Score">Player 2: 0</div>
-      </section>
-      <section class="game-grid">
-        <div class="game-board"></div>
-      </section>
+      <div/>
       <!-- Error modal displays if either player name is null-->
       <div id="modal" class="modal">
         <div class="modal-content">
@@ -74,6 +72,7 @@
           <p>Please enter both players</p>
         </div>
       </div>
-    </container>
+  </div>
+</div>
   </body>
 </html>

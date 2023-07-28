@@ -1,49 +1,162 @@
-.game-grid {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* height: 100vh; */
-  background-color: #f0f0f0;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
-
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.game-grid {
+  display: flex;
+  grid-column: 1;
+  grid-row: 4;
+  background-color: #f0f0f0;
+}
 .game-board {
   background-color: #ccc;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
-  width: 400px;
+  gap: 10px;
+  height: 350px;
+  width: 350px;
 }
-
 .card {
   background-color: #2d89ef;
   border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  width: 80px;
+  height: 1fr;
+  width: 1fr;
   cursor: pointer;
   perspective: 1000px;
   border-radius: 10px;
 }
-
 .card-inner {
-  position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
 }
-
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
-
 .card-front,
 .card-back {
-  position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -52,13 +165,11 @@
   justify-content: center;
   align-items: center;
 }
-
 .card-front {
   background-color: #f0f0f0;
   color: #2d89ef;
   transform: rotateY(180deg);
 }
-
 .card-front i {
   font-size: 2rem;
   color: #2d89ef;
@@ -84,26 +195,33 @@
   border: 1px solid #888;
   width: 80%;
 }
-
 .close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-
+.container--10 {
+  background-color: #ddd;
+  margin: 2px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
+  gap: 10px;
+  column-gap: 2px;
+  row-gap: 2px;
+  justify-content: center;
+  justify-items: center;
+}
 .playerInput {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: self-start;
+  grid-column: 1;
+  grid-row: 1;
   background-color: chartreuse;
 }
 .playerInput h2 {
@@ -111,9 +229,9 @@
   color: #000;
   font-size: 24px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
-
 .playerInput .player1Form {
   background-color: aqua;
 }
@@ -133,7 +251,6 @@ label {
   font-size: 18px;
   margin: 10px 0;
 }
-
 input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -142,12 +259,9 @@ input[type="text"] {
   width: 200px;
   margin-bottom: 20px;
 }
-
 .game-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: self-start;
+  grid-column: 1;
+  grid-row: 3;
   background-color: crimson;
 }
 input[type="submit"],
@@ -162,29 +276,35 @@ input[type="button"] {
   margin: 10px 5px;
   transition: background-color 0.2s ease;
 }
-
 input[type="submit"]:hover,
 input[type="button"]:hover {
   background-color: #0056b3;
 }
-
 .playerScores {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: self-start;
+  grid-column: 1;
+  grid-row: 2;
   background-color: #ef2dbe;
 }
-
-#player1Score,
+#player1Score {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
 #player2Score {
   font-size: 18px;
   text-align: center;
-  margin: 5px 0;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
-
 .playerScores h2 {
   background-color: brown;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 .playerScores #player1Score {
   background-color: darkmagenta;
