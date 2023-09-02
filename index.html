@@ -15,64 +15,70 @@
     <title>Memory Game</title>
   </head>
   <body>
-<div class="container--10">
-  <div class="playerInput">
-      <form id="form" onsubmit="event.preventDefault(); handleSubmit();">
-        <h2>Enter Player Names</h2>
-          <div class="player1Form">
-          <label for="player1" id="player1Label">Player 1:</label>
+    <div class="container">
+      <div class="playerInput">
+        <form id="form" onsubmit="event.preventDefault(); handleSubmit();">
+          <h2>Enter Player Names</h2>
+          <div class="playerNameInput">
+            <input
+              type="text"
+              id="player1"
+              name="player1"
+              placeholder="Player 1 Name"
+              onfocusout="player1()"
+            />
+            <input
+              type="text"
+              id="player2"
+              name="player2"
+              placeholder="Player 2 Name"
+              onfocusout="player2()"
+            />
+          </div>
           <input
-            type="text"
-            id="player1"
-            name="player1"
-            placeholder="Enter Name"
+            type="button"
+            i
+            id="submitBtn"
+            value="Submit"
+            onclick="handleSubmit();"
           />
-        </div>
-          <div class="player2Form">
-          <label for="player2" id="player2Label">Player 2:</label>
           <input
-            type="text"
-            id="player2"
-            name="player2"
-            placeholder="Enter Name"
+            type="button"
+            id="resetBtn"
+            value="Reset Game"
+            onclick="resetGame();"
           />
-        </div>
+          <input
+            type="button"
+            id="resetBtn"
+            value="Reset"
+            style="display: inline-block"
+            onclick="handleReset();"
+          />
         </form>
-  </div>
-  <div class="gameButtons">
+      </div>
+      <!-- <div class="gameButtons">
         <form id="form2" onsubmit="event.preventDefault(); handleSubmit();"></form>
-        <input type="submit" id="submitBtn" value="Submit" />
-        <input
-          type="button"
-          id="resetBtn"
-          value="Reset Game"
-          onclick="resetGame();"
-        />
-        <input
-          type="button"
-          id="resetBtn"
-          value="Reset"
-          style="display: none"
-          onclick="handleReset();"
-        />
+        
       </form>
-  </div>
-  <div class="game-grid">
-      <div class="game-board"></div>
-  </div>
-  <div class="playerScores">
+  </div> -->
+      <div class="playerScores">
         <h2>Player Scores</h2>
         <div id="player1Score">Player 1: 0</div>
         <div id="player2Score">Player 2: 0</div>
-      <div/>
-      <!-- Error modal displays if either player name is null-->
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>Please enter both players</p>
+        <div />
+        <div class="game-grid">
+          <div class="game-board"></div>
+        </div>
+
+        <!-- Error modal displays if either player name is null-->
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Please enter both players</p>
+          </div>
         </div>
       </div>
-  </div>
-</div>
+    </div>
   </body>
 </html>
