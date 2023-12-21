@@ -1,12 +1,3 @@
-/* import playerFunction from "./player";
-
-const player1 = new playerFunction (
-  document.getElementById("player1").value
-);
-const player2 = new playerFunction (
-  document.getElementById("player2").value
-); */
-
 const icons = [
   "fas fa-sun",
   "fas fa-bicycle",
@@ -36,14 +27,6 @@ let lockBoard = false;
 let playerScores = [0, 0];
 let currentPlayer = 0;
 
-function player1(str) {
-  return str;
-}
-
-function player2(str) {
-  return str;
-}
-
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -65,15 +48,6 @@ function createCard(icon) {
 }
 
 function flipCard() {
-  // Get player names
-  // const player1Name = document.getElementById("player1").value;
-  // const player2Name = document.getElementById("player2").value;
-
-  // if (!player1Name || !player2Name) {
-  //  modal.style.display = "block";
-  //  return;
-  // }
-
   if (lockBoard) return;
   if (this === firstCard) return;
 
@@ -100,16 +74,23 @@ function checkForMatch() {
   unflipCards();
 }
 
-// Dupped elsware in code (lime 155ish)
-/* function disableCardsOld() {
+function switchPlayer() {
+  // Remove highlight from the current player
+  document
+    .getElementById(`player${currentPlayer + 1}Score`)
+    .classList.remove("active-player");
+
+  currentPlayer = 1 - currentPlayer; // Switch between 0 and 1
+
+  // Add highlight to the new current player
+  document
+    .getElementById(`player${currentPlayer + 1}Score`)
+    .classList.add("active-player");
+}
+
+function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-
-  resetBoard();
-} */
-
-function switchPlayer() {
-  currentPlayer = 1 - currentPlayer; // Switch between 0 and 1
 }
 
 function disableCards() {
@@ -119,25 +100,18 @@ function disableCards() {
   // Increment current player's score
   playerScores[currentPlayer]++;
 
-  // Update score display
-  document.getElementById(`player${currentPlayer + 1}Score`).textContent = `${
-    document.getElementById(`player${currentPlayer + 1}`).textContent
-  }: ${playerScores[currentPlayer]}`;
+  // Fetch the current player's name from their score display
+  const playerName = document
+    .getElementById(`player${currentPlayer + 1}Score`)
+    .textContent.split(":")[0];
+
+  // Update score display with the correct player name and new score
+  document.getElementById(
+    `player${currentPlayer + 1}Score`
+  ).textContent = `${playerName}: ${playerScores[currentPlayer]}`;
 
   resetBoard();
 }
-
-// Dupped elsware in code (lime 249ish)
-/* function unflipCardsOld() {
-  lockBoard = true;
-
-  setTimeout(() => {
-    firstCard.classList.remove("flipped");
-    secondCard.classList.remove("flipped");
-
-    resetBoard();
-  }, 1000);
-} */
 
 function unflipCards() {
   lockBoard = true;
@@ -162,17 +136,16 @@ function init() {
     const card = createCard(icon);
     gameBoard.appendChild(card);
   });
+
+  // Initialize highlight for the first player
+  document.getElementById("player1Score").classList.add("active-player");
+  document.getElementById("player2Score").classList.remove("active-player");
 }
 
-init();
 function handleSubmit() {
   // Get player names
   const player1Name = document.getElementById("player1").value;
   const player2Name = document.getElementById("player2").value;
-
-  // Update label text
-  // document.getElementById("player1Label").textContent = "Player 1:";
-  // document.getElementById("player2Label").textContent = "Player 2:";
 
   // Update score text
   document.getElementById("player1Score").textContent = player1Name + ": 0";
@@ -184,73 +157,54 @@ function handleSubmit() {
   document.getElementById("submitBtn").style.display = "none";
 
   // Show reset button
-  document.getElementById("resetBtn").style.display = "inline-block";
+  document.getElementById("resetGameBtn").style.display = "inline-block";
 }
-
-function handleResetOld() {
-  // Reset label text
-  document.getElementById("player1Label").textContent = "Player 1:";
-  document.getElementById("player2Label").textContent = "Player 2:";
-
-  // Reset score text
-  document.getElementById("player1Score").textContent = "Player 1: 0";
-  document.getElementById("player2Score").textContent = "Player 2: 0";
-
-  // Show input fields and submit button
-  document.getElementById("player1").style.display = "inline-block";
-  document.getElementById("player2").style.display = "inline-block";
-  document.getElementById("submitBtn").style.display = "inline-block";
-
-  // Hide reset button
-  document.getElementById("resetBtn").style.display = "none";
-}
-
-/* function handleSubmit() {
-  // Get player names
-  const player1Name = document.getElementById("player1").value;
-  const player2Name = document.getElementById("player2").value;
-
-  // Update label text
-  document.getElementById("player1Label").textContent = player1Name;
-  document.getElementById("player2Label").textContent = player2Name;
-
-  // Update score text
-  document.getElementById("player1Score").textContent = player1Name + ": 0";
-  document.getElementById("player2Score").textContent = player2Name + ": 0";
-
-  // Reset player scores and current player
-  playerScores = [0, 0];
-  currentPlayer = 0;
-
-  // Remaining code...
-} */
 
 function handleReset() {
-  // Reset label text
-  //  document.getElementById("player1Label").textContent = "Player 1:";
-  // document.getElementById("player2Label").textContent = "Player 2:";
+  // Keep player names
+  const player1Name = document
+    .getElementById("player1Score")
+    .textContent.split(":")[0];
+  const player2Name = document
+    .getElementById("player2Score")
+    .textContent.split(":")[0];
 
-  // Reset score text
+  // Reset scores to 0
   document.getElementById("player1Score").textContent = player1Name + ": 0";
   document.getElementById("player2Score").textContent = player2Name + ": 0";
 
   // Reset player scores and current player
   playerScores = [0, 0];
   currentPlayer = 0;
+
+  // Reset the board
   resetBoard();
 
-  // Remaining code...
+  // Reset highlights
+  document.getElementById("player1Score").classList.add("active-player");
+  document.getElementById("player2Score").classList.remove("active-player");
 }
 
 function resetGame() {
-  // Reset player scores
+  // Reset player scores and current player
   playerScores = [0, 0];
   currentPlayer = 0;
 
-  // Reset score text
-  document.getElementById("player1Score").textContent = "Player 1 : 0";
+  // Reset score text to default
+  document.getElementById("player1Score").textContent = "Player 1: 0";
   document.getElementById("player2Score").textContent = "Player 2: 0";
-  resetGame();
+
+  // Clear the player name inputs and make them visible
+  const player1Input = document.getElementById("player1");
+  const player2Input = document.getElementById("player2");
+  player1Input.value = "";
+  player2Input.value = "";
+  player1Input.style.display = "inline-block";
+  player2Input.style.display = "inline-block";
+
+  // Show the submit button and hide the reset game button
+  document.getElementById("submitBtn").style.display = "inline-block";
+  document.getElementById("resetGameBtn").style.display = "none";
 
   // Remove all cards from the game board
   while (gameBoard.firstChild) {
@@ -259,6 +213,10 @@ function resetGame() {
 
   // Re-initialize the game
   init();
+
+  // Reset highlights
+  document.getElementById("player1Score").classList.add("active-player");
+  document.getElementById("player2Score").classList.remove("active-player");
 }
 
 const modal = document.getElementById("modal");
@@ -273,3 +231,5 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+init(); // Start the game

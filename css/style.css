@@ -224,6 +224,11 @@ table {
   text-decoration: none;
   cursor: pointer;
 }
+.active-player {
+  color: green; /* or any style you prefer */
+  font-weight: bold;
+}
+
 .playerInput {
   grid-column: 1;
   grid-row: 1;
