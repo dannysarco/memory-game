@@ -155,6 +155,7 @@ function handleSubmit() {
   document.getElementById("player1").style.display = "none";
   document.getElementById("player2").style.display = "none";
   document.getElementById("submitBtn").style.display = "none";
+  document.getElementById("labelEnterNames").style.display = "none";
 
   // Show reset button
   document.getElementById("resetGameBtn").style.display = "inline-block";
@@ -202,8 +203,9 @@ function resetGame() {
   player1Input.style.display = "inline-block";
   player2Input.style.display = "inline-block";
 
-  // Show the submit button and hide the reset game button
+  // Show the submit button, Enter Names label, and hide the reset game button
   document.getElementById("submitBtn").style.display = "inline-block";
+  document.getElementById("labelEnterNames").style.display = "inline-block";
   document.getElementById("resetGameBtn").style.display = "none";
 
   // Remove all cards from the game board
